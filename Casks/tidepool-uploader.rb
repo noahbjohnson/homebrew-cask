@@ -1,6 +1,6 @@
 cask "tidepool-uploader" do
-  version "2.34.0"
-  sha256 "a4ddabfe86c7b7e5135f4ebc6c2667659bbcb7338269184bd5852066e7c2cef4"
+  version "2.36.3"
+  sha256 "33d3559091392ea7495271891db201e4b7c2a02f1081409f2a0cb8b3c7288c81"
 
   url "https://github.com/tidepool-org/chrome-uploader/releases/download/v#{version}/tidepool-uploader-#{version}.dmg/",
       verified: "github.com/tidepool-org/chrome-uploader/"

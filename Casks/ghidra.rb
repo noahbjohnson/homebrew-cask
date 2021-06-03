@@ -1,10 +1,19 @@
 cask "ghidra" do
-  version "9.2.2,20201229"
-  sha256 "8cf8806dd5b8b7c7826f04fad8b86fc7e07ea380eae497f3035f8c974de72cf8"
+  version "9.2.4,20210427"
+  sha256 "c1f18cdb12e2e1c0313e7becf7f0387226937ac67ad6c6e5056fa889229f969a"
 
   url "https://www.ghidra-sre.org/ghidra_#{version.before_comma}_PUBLIC_#{version.after_comma}.zip"
   name "Ghidra"
+  desc "Software reverse engineering (SRE) suite of tools"
   homepage "https://www.ghidra-sre.org/"
+
+  livecheck do
+    url "https://ghidra-sre.org/"
+    strategy :page_match do |page|
+      match = page.match(/href=.*?ghidra[._-](\d+(?:\.\d+)*)[._-]PUBLIC[._-](\d+)\.zip/i)
+      "#{match[1]},#{match[2]}"
+    end
+  end
 
   conflicts_with cask: "homebrew/cask-versions/ghidra-beta"
 

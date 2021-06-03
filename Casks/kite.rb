@@ -1,6 +1,6 @@
 cask "kite" do
-  version "0.20210212.0"
-  sha256 "420fabfdd09d3bf741d054ab47d7f2d80f9dd119328193ff8b47d212fdb59b49"
+  version "0.20210524.0"
+  sha256 "f5276734f0d5e565dfe27112546960573d88a3a6e7a14080748579e7921499ef"
 
   url "https://draqv87tt43s0.cloudfront.net/mac/#{version}/Kite.dmg",
       verified: "draqv87tt43s0.cloudfront.net/"

@@ -1,14 +1,14 @@
 cask "intellij-idea-ce" do
-  version "2020.3.2"
+  version "2021.1.1,211.7142.45"
 
   if Hardware::CPU.intel?
-    sha256 "008259b4df15cea0d38edc55e166dc24b7973ad3a4985ce2ebaa02b6023a66ac"
+    sha256 "e3532ae782789012b99d54a320c56a419be391798772abae09754eacd0eafb06"
 
-    url "https://download.jetbrains.com/idea/ideaIC-#{version}.dmg"
+    url "https://download.jetbrains.com/idea/ideaIC-#{version.before_comma}.dmg"
   else
-    sha256 "efadaf026e141227d07420505bcde6cadd5297db66fbfb5bbaefc0cf5f26481f"
+    sha256 "e788760460c3987d52e82d155b03e688c1ef8205b3153fc81846a286bba7e431"
 
-    url "https://download.jetbrains.com/idea/ideaIC-#{version}-aarch64.dmg"
+    url "https://download.jetbrains.com/idea/ideaIC-#{version.before_comma}-aarch64.dmg"
   end
 
   name "IntelliJ IDEA Community Edition"
@@ -18,12 +18,16 @@ cask "intellij-idea-ce" do
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=IIC&latest=true&type=release"
-    strategy :page_match
-    regex(%r{/ideaIC-(\d+(?:\.\d+)*)\.dmg}i)
+    strategy :page_match do |page|
+      JSON.parse(page)["IIC"].map do |release|
+        "#{release["version"]},#{release["build"]}"
+      end
+    end
   end
 
   auto_updates true
   conflicts_with cask: "homebrew/cask-versions/intellij-idea-ce19"
+  depends_on macos: ">= :high_sierra"
 
   app "IntelliJ IDEA CE.app"
 

@@ -1,12 +1,17 @@
 cask "modern-csv" do
-  version "1.3.19"
-  sha256 "a9a6fd295bc40d1341c5dc92803e2b60dec7e4aeb06f3c094bb28938cb387de5"
+  version "1.3.30"
+  sha256 "addb935c3ed07d9a33b526f6ac90f1557248a648b8c8b5dabcf6546497eb28b9"
 
   url "https://www.moderncsv.com/release/ModernCSV-Mac-v#{version}.dmg"
-  appcast "https://www.moderncsv.com/latest-version/"
   name "Modern CSV"
   desc "CSV editor"
   homepage "https://www.moderncsv.com/"
+
+  livecheck do
+    url "https://www.moderncsv.com/latest-version/"
+    strategy :page_match
+    regex(/Modern\s*CSV\s*v?(\d+(?:\.\d+)*)/i)
+  end
 
   app "Modern CSV.app"
 

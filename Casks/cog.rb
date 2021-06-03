@@ -1,10 +1,10 @@
 cask "cog" do
-  version "1430,e8c6a00d9"
-  sha256 "1b295dcd563308ee5647e453ee904cb918dfe3c56cfb84f60933e0a822697866"
+  version "1537,668475c4"
+  sha256 "a735af68b139d0d5201c3866f7b781f608ee7fb10c1a2c9b9ce30deff57637ae"
 
   url "https://f.losno.co/cog/Cog-#{version.after_comma}.zip"
   name "Cog"
-  desc "Free and open source audio player"
+  desc "Audio player"
   homepage "https://cog.losno.co/"
 
   livecheck do

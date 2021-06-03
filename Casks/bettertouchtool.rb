@@ -1,15 +1,19 @@
 cask "bettertouchtool" do
-  version "3.553,1693"
-  sha256 "5b88c6c0a406c97c977a6cd56a58fc6f3abd94aa8f6619b41fcbfb632985485c"
+  version "3.563-1703"
+  sha256 "210d773b6e7f302db07c90f01592d002f6c3f869103cbd26072f489a949c2da6"
 
-  url "https://folivora.ai/releases/btt#{version.before_comma}-#{version.after_comma}.zip"
+  url "https://folivora.ai/releases/btt#{version}.zip"
   name "BetterTouchTool"
   desc "Tool to customize input devices and automate computer systems"
   homepage "https://folivora.ai/"
 
   livecheck do
-    url "https://updates.folivora.ai/appcast.xml?trial=1"
-    strategy :sparkle
+    url "https://folivora.ai/releases/"
+    strategy :page_match do |page|
+      page.scan(/btt(\d+(?:.\d+)*)\.zip.*?(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})/i)
+          .max_by { |(_, time)| Time.parse(time) }
+          .first
+    end
   end
 
   auto_updates true

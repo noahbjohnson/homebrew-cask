@@ -1,6 +1,6 @@
 cask "fork" do
-  version "2.4"
-  sha256 "86d1a9eaefdb659c717c75ae91ba7b535e99ff99560f1ee6455bd50ca2faf32e"
+  version "2.8"
+  sha256 "9c582da29b089ebdbc2543032261239a97f183582b745549bf4436ef1f24dea0"
 
   url "https://forkapp.ams3.cdn.digitaloceanspaces.com/mac/Fork-#{version}.dmg",
       verified: "forkapp.ams3.cdn.digitaloceanspaces.com/mac/"
@@ -10,7 +10,9 @@ cask "fork" do
 
   livecheck do
     url "https://git-fork.com/update/feed.xml"
-    strategy :sparkle
+    strategy :sparkle do |item|
+      item.url[%r{/Fork-(\d+(?:\.\d+)*)\.dmg}i, 1]
+    end
   end
 
   auto_updates true

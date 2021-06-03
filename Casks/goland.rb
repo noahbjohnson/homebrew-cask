@@ -1,11 +1,13 @@
 cask "goland" do
-  version "2020.3.2,203.7148.71"
+  version "2021.1.2,211.7442.27"
 
   if Hardware::CPU.intel?
-    sha256 "e9dfe06fb38eb29e320985cc179ce7c1995a5c10fe0bff3eca8d40456e277503"
+    sha256 "bd451d441bf909d795252cd82f61166556d93c92fb043d929736ee9da7d3c7f3"
+
     url "https://download.jetbrains.com/go/goland-#{version.before_comma}.dmg"
   else
-    sha256 "be94ba11b60689446e75d6372cc9aec555ae21e1037239b09240ec8031dc6262"
+    sha256 "e1a8d0e4d8bb2ae3904a16de2465c3a865e76c512bab0258be692f1ed1908f68"
+
     url "https://download.jetbrains.com/go/goland-#{version.before_comma}-aarch64.dmg"
   end
 
@@ -16,13 +18,14 @@ cask "goland" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=GO&latest=true&type=release"
     strategy :page_match do |page|
-      version = page.match(/"version":"(\d+(?:\.\d+)*)/i)
-      build = page.match(/"build":"(\d+(?:\.\d+)*)/i)
-      "#{version[1]},#{build[1]}"
+      JSON.parse(page)["GO"].map do |release|
+        "#{release["version"]},#{release["build"]}"
+      end
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "GoLand.app"
 
@@ -36,10 +39,10 @@ cask "goland" do
   end
 
   zap trash: [
-    "~/Library/Application Support/GoLand",
-    "~/Library/Application Support/GoLand#{version.major_minor}",
-    "~/Library/Caches/GoLand#{version.major_minor}",
-    "~/Library/Logs/GoLand#{version.major_minor}",
+    "~/Library/Application Support/JetBrains/GoLand",
+    "~/Library/Application Support/JetBrains/GoLand#{version.major_minor}",
+    "~/Library/Caches/JetBrains/GoLand#{version.major_minor}",
+    "~/Library/Logs/JetBrains/GoLand#{version.major_minor}",
     "~/Library/Preferences/GoLand#{version.major_minor}",
     "~/Library/Preferences/com.jetbrains.goland.plist",
     "~/Library/Saved Application State/com.jetbrains.goland.SavedState",

@@ -1,12 +1,16 @@
 cask "exodus" do
-  version "21.3.2"
-  sha256 "5e3f89527290f18bc8fd4ff5d316dadfc0c1b4cbb7c1ed554b9e5703a163ad43"
+  version "21.5.25"
+  sha256 "8e6dc6676e97fa01cb29a82ef38560adce79c68e40ae2baf75e46a67c2ef6d40"
 
   url "https://downloads.exodus.com/releases/exodus-macos-#{version}.dmg"
-  appcast "https://www.exodus.com/releases/"
   name "Exodus"
   desc "Desktop wallet for cryptocurrency assets"
   homepage "https://www.exodus.com/"
+
+  livecheck do
+    url "https://www.exodus.com/releases/"
+    regex(%r{/hashes[._-]exodus[._-]?v?(\d+(?:\.\d+)+)\.txt}i)
+  end
 
   auto_updates true
 

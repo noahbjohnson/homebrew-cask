@@ -1,9 +1,16 @@
 cask "github" do
-  version "2.6.4-1864024f"
-  sha256 "9e9e99042752b954b67cca6c678010969cbba1553761794d25be85923ab554e1"
+  version "2.8.3-dee35666"
 
-  url "https://desktop.githubusercontent.com/releases/#{version}/GitHubDesktop.zip",
-      verified: "githubusercontent.com/"
+  if Hardware::CPU.intel?
+    sha256 "7c975ef6592695ab94fde340f2bbd4ce05d2539a1e1b1e3228c4f7d0f38ac8be"
+    url "https://desktop.githubusercontent.com/releases/#{version}/GitHubDesktop-x64.zip",
+        verified: "githubusercontent.com/"
+  else
+    sha256 "c232f974f15e1db885db62679ff09ee122ea092aff56b2fe581887b537211104"
+    url "https://desktop.githubusercontent.com/releases/#{version}/GitHubDesktop-arm64.zip",
+        verified: "githubusercontent.com/"
+  end
+
   name "GitHub Desktop"
   desc "Desktop client for GitHub repositories"
   homepage "https://desktop.github.com/"
@@ -11,10 +18,11 @@ cask "github" do
   livecheck do
     url "https://central.github.com/deployments/desktop/desktop/latest/darwin"
     strategy :header_match
-    regex(%r{(\d+(?:\.\d+).*)/GitHubDesktop\.zip}i)
+    regex(%r{(\d+(?:\.\d+)[^/]*)/GitHubDesktop-(arm64|x64)\.zip}i)
   end
 
   auto_updates true
+  conflicts_with cask: "homebrew/cask-versions/github-beta"
 
   app "GitHub Desktop.app"
   binary "#{appdir}/GitHub Desktop.app/Contents/Resources/app/static/github.sh", target: "github"

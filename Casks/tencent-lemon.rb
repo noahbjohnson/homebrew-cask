@@ -1,12 +1,18 @@
 cask "tencent-lemon" do
-  version "4.8.6"
-  sha256 "c26af042e9574faa9bb4d3a631864a43612e471e012ba184f5099b2394da2abf"
+  version "4.8.9"
+  sha256 "a33308b1ccc70c40da0bef2745facb72ab2b4211ad4ead200081ccf3b41466fb"
 
-  url "https://pm.myapp.com/invc/xfspeed/qqpcmgr/module_update/Lemon_#{version}.dmg",
+  url "https://pm.myapp.com/invc/xfspeed/qqpcmgr/module_update/Lemonv#{version}.dmg",
       verified: "pm.myapp.com/invc/xfspeed/qqpcmgr/"
-  appcast "https://lemon.guanjia.qq.com/latest/package"
   name "Tencent Lemon Cleaner"
-  homepage "https://mac.gj.qq.com/"
+  desc "Cleanup and system status tool"
+  homepage "https://lemon.qq.com/"
+
+  livecheck do
+    url "https://lemon.guanjia.qq.com/latest/package"
+    strategy :page_match
+    regex(/Lemonv?(\d+(?:\.\d+)*)\.dmg/i)
+  end
 
   app "Tencent Lemon.app"
 

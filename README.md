@@ -32,7 +32,6 @@ And there we have it. An application installed with one quick command: no clicki
 
 * Find basic documentation on using Homebrew Cask in [USAGE.md](USAGE.md)
 * Want to contribute a Cask? Awesome! See [CONTRIBUTING.md](CONTRIBUTING.md)
-* Want to hack on our code? Also awesome! See [hacking.md](doc/development/hacking.md)
 * More project-related details and discussion are available in the [documentation](doc)
 
 ## Reporting bugs
@@ -57,7 +56,7 @@ If the issue is still not solved, see the guides for common problems:
 
 ## Requests
 
-* Issues requesting new casks will be closed. If you want a cask added to the main repositories, [submit a pull request](https://github.com/Homebrew/homebrew-cask/blob/master/CONTRIBUTING.md#adding-a-cask).
+* Issues requesting new casks will be closed. If you want a cask added to the main repositories, [submit a pull request](https://github.com/Homebrew/homebrew-cask/blob/HEAD/CONTRIBUTING.md#adding-a-cask).
 * For a feature request, [use this template](https://github.com/Homebrew/homebrew-cask/issues/new?template=02_feature_request.md).
 
 ## Questions? Wanna chat?

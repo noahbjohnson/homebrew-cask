@@ -1,9 +1,8 @@
 cask "zoom-for-it-admins" do
-  version "5.5.13130.0228"
-  sha256 "688070c76de35e16f59dc21b3df233c34d50e02c4379d79019ba25c607de0373"
+  version "5.6.6.950"
+  sha256 "0368cf1d8706dc786935c66add327a945e7210d972e2633a224590a0cc20985d"
 
-  url "https://d11yldzmag5yn.cloudfront.net/prod/#{version}/ZoomInstallerIT.pkg",
-      verified: "d11yldzmag5yn.cloudfront.net/"
+  url "https://cdn.zoom.us/prod/#{version}/ZoomInstallerIT.pkg"
   name "Zoom for IT Admins"
   desc "Video communication and virtual meeting platform"
   homepage "https://support.zoom.us/hc/en-us/articles/115001799006-Mass-Deployment-with-Preconfigured-Settings-for-Mac"

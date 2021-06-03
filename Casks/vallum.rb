@@ -1,19 +1,19 @@
 cask "vallum" do
-  version "3.3.4"
-  sha256 "3d47f43b104c65a5874bdae64995df3c2eee39d2fb640566325ae280d5ca7654"
+  version "4.0.1"
+  sha256 "fa93c4f4d69853634e8f178a77696b2407b2e30bcebee3a7142b92fdd714d85e"
 
   url "https://github.com/TheMurusTeam/Vallum/releases/download/v#{version}/vallum-#{version}.zip",
       verified: "github.com/TheMurusTeam/Vallum/"
   name "Vallum"
+  desc "Application firewall"
   homepage "https://www.vallumfirewall.com/"
 
   livecheck do
     url :url
-    strategy :git
-    regex(/^v?(\d+(?:\.\d+)*)$/i)
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
-  pkg "Vallum.pkg"
+  app "Vallum.app"
 
   uninstall pkgutil:   "it.murus.afw.Vallum",
             launchctl: [

@@ -1,28 +1,30 @@
 cask "pycharm" do
-  version "2020.3.3,203.7148.72"
+  version "2021.1.2,211.7442.45"
 
   if Hardware::CPU.intel?
-    sha256 "ba71601c02316a9cbffbcbdbabee79d9a8b7d90f29a96fcc6c3445e4043b4b33"
+    sha256 "053911e24c9e19b597e84076e52601b6fc5e2efae8d195b2c43ea8fd01aa5261"
     url "https://download.jetbrains.com/python/pycharm-professional-#{version.before_comma}.dmg"
   else
-    sha256 "57153ae5274931dd8521f5dc513967d92654a3b32d47dd2dd56c38d9da060aa0"
+    sha256 "27f18b4de875a61137d41144c8f523b3c0fab9f8de6d730bfb77cfd2cd56c755"
     url "https://download.jetbrains.com/python/pycharm-professional-#{version.before_comma}-aarch64.dmg"
   end
 
   name "PyCharm"
+  name "PyCharm Professional"
   desc "IDE for professional Python development"
   homepage "https://www.jetbrains.com/pycharm/"
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=PCP&latest=true&type=release"
     strategy :page_match do |page|
-      version = page.match(/"version":"(\d+(?:\.\d+)*)/i)
-      build = page.match(/"build":"(\d+(?:\.\d+)*)/i)
-      "#{version[1]},#{build[1]}"
+      JSON.parse(page)["PCP"].map do |release|
+        "#{release["version"]},#{release["build"]}"
+      end
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "PyCharm.app"
 

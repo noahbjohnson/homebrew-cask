@@ -1,16 +1,14 @@
 cask "zoom" do
-  version "5.5.13130.0228"
+  version "5.6.6.950"
 
   if Hardware::CPU.intel?
-    sha256 "07ebb144640665304bbe73be49aa57016ef1f1ed92a3f8b3aa319a008d25a941"
+    sha256 "562d4fc25ff0b3ae3df597644cd6e2cdc0513751f610e334ff23e6464c73bf45"
 
-    url "https://d11yldzmag5yn.cloudfront.net/prod/#{version}/Zoom.pkg",
-        verified: "d11yldzmag5yn.cloudfront.net/"
+    url "https://cdn.zoom.us/prod/#{version}/Zoom.pkg"
   else
-    sha256 "279b6eb0f7ea1a2904f9b254733d68bac5b802e0e076683cc76674c8e9d002be"
+    sha256 "60e5d1865bbf176bebe5a42b2c2b0e4f6f38af3dc4de25ee656b11407836810b"
 
-    url "https://d11yldzmag5yn.cloudfront.net/prod/#{version}/arm64/Zoom.pkg",
-        verified: "d11yldzmag5yn.cloudfront.net/"
+    url "https://cdn.zoom.us/prod/#{version}/arm64/Zoom.pkg"
   end
 
   name "Zoom.us"
@@ -28,6 +26,13 @@ cask "zoom" do
   conflicts_with cask: "zoom-for-it-admins"
 
   pkg "Zoom.pkg"
+
+  postflight do
+    # Description: Ensure console variant of postinstall is non-interactive.
+    # This is because `open "$APP_PATH"&` is called from the postinstall
+    # script of the package and we don't want any user intervention there.
+    system_command "/usr/bin/pkill", args: ["-f", "#{appdir}/zoom.us.app"], must_succeed: false
+  end
 
   uninstall signal:  ["KILL", "us.zoom.xos"],
             pkgutil: "us.zoom.pkg.videmeeting",
@@ -51,9 +56,12 @@ cask "zoom" do
     "~/Library/Logs/zoom.us",
     "~/Library/Logs/zoominstall.log",
     "~/Library/Logs/ZoomPhone",
+    "~/Library/Group Containers/BJ4HAAB9B3.ZoomClient3rd",
     "~/Library/Mobile Documents/iCloud~us~zoom~videomeetings",
     "~/Library/Preferences/ZoomChat.plist",
     "~/Library/Preferences/us.zoom.airhost.plist",
+    "~/Library/Preferences/us.zoom.caphost.plist",
+    "~/Library/Preferences/us.zoom.Transcode.plist",
     "~/Library/Preferences/us.zoom.xos.Hotkey.plist",
     "~/Library/Preferences/us.zoom.xos.plist",
     "~/Library/Safari/PerSiteZoomPreferences.plist",
